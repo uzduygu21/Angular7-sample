@@ -25,16 +25,12 @@
             <td>
               <a href="#" [routerLink]="['/products',product.productCode]">
               {{product.productName}}
-              <!-- productName leri link yaptikki tiklansin, herzaman ilk route URL pattern olcak, burda /products fakat sadece onu yazinca hepsi ayni sadece /products oluyo linkler
-              Farkli olmasi lazimki sayfalari ayirt edebilelim. product.productCode, hepinin code'unu sagladi ornegin /products/GDN-0011, hepsi farkli-farkli -->
               </a>
             </td>
             <td>{{product.productCode}}</td>
             <td>{{product.price}}</td>
             <td>
               <app-rating [rating]="product.starRating" (ratingEvent)="receiveDataFromChild($event)"></app-rating> 
-      <!-- we make rating available for products and used property binding // send data from parent to child-->
-      <!-- ratingEvent for receiving data from child, we used eventemitter use $event-->
             </td>
           </tr>
         </table>

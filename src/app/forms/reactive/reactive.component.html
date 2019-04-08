@@ -2,13 +2,10 @@
     <span panel-title>Reactive Forms</span>
     <div panel-content>
       <form [formGroup]="userForm">
-        <!-- this is how you get reference of particular object. #userForm -->
         <div class="form-group">
           <label class="control-label">First Name</label>
           <input type="text" placeholder="First Name" class="form-control" formControlName="firstname" />
-        <!-- formControlName TS ile baglantisi, orda ne belirttiysem ayni ismi kullanicam, firstname -->
           <div *ngIf="!userForm.get('firstname').valid && userForm.get('firstname').touched">
-            <!-- FormObject.get('formControlName') this is how accesing the reference of input in reactive -->
             <div class="alert alert-danger" *ngIf="userForm.get('firstname').errors.required">Please fill in last name</div>
             <div class="alert alert-danger" *ngIf="userForm.get('firstname').errors.minlength">Please fill in valid last name</div>
         </div> 
@@ -24,7 +21,6 @@
         <div class="form-group">
           <label class="control-label">Email</label>
             <input type="email" placeholder="Email" class="form-control" formControlName="email">
-          <!-- Email validation pattern found from google, you can use any type you want -->
           <div *ngIf="!userForm.get('email').valid && userForm.get('email').touched">
             <div class="alert alert-danger" *ngIf="userForm.get('email').errors.required">Please fill in email</div>
             <div class="alert alert-danger" *ngIf="userForm.get('email').errors.pattern">Please fill in valid email</div>
@@ -33,7 +29,6 @@
         <div class="form-group">
             <label class="control-label">Male
               <input type="radio" value="male" formControlName="gender" (click)="updateValidation('male')">
-            <!-- input tiklayinca updateValidation func cagiriyor,female ise Validation koycaz(address zorunlu) -->
             </label>
             <label class="control-label">Female
               <input type="radio" value="female" formControlName="gender" (click)="updateValidation('female')">
@@ -51,7 +46,6 @@
             </div>
         </div>
         <button class="btn btn-primary" [disabled]="!userForm.valid" (click)="saveUserInfo()">Save</button>
-      <!-- Using reference of the form, if it's not valid I disabled button.  -->
       </form>
     </div>
   </app-panel-box>

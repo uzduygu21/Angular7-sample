@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';//authService'i authentication func larimin hepsini koymak icin olusturdum
-//ve login fun.'da onun icinde old. icin oncelikle import ediyorum
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -9,9 +9,9 @@ import { AuthService } from '../auth.service';//authService'i authentication fun
 })
 export class LoginComponent implements OnInit {
 
-  auth:any={} //auth objectini tanimladim, simdilik sadece 2 verim var sonradan cok verim olur diye object ile calismak en sagliklisi
+  auth:any={} 
 
-  constructor(private _authService:AuthService) { }//authService inject ettim
+  constructor(private _authService:AuthService) { }
 
   ngOnInit() {
   }

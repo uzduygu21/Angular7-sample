@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const jwt=require("jsonwebtoken");//jsonwebtoken package indirdim, burdada require ettik
+const jwt=require("jsonwebtoken");
 
-app.use(express.json()); // Middleware func, include this(we used req.body that's why we needed middleware)
-app.use(express.urlencoded({extended:true})); //// Middleware func, include this
+app.use(express.json()); 
+app.use(express.urlencoded({extended:true}));
 
 app.use(cors({
     origin:"http://localhost:4200"
@@ -14,13 +14,10 @@ app.post("/authenticate",(req,res)=>{
   const credentials=req.body;
 
   const token=jwt.sign({"username":credentials.username,"org":"Marlabs"},'marlabs-secret',{expiresIn:'1h'})
-//bu pattern npmjs.com'dan alabiliriz."username" part,the part we need to store in token.we used username, system will understand okay this is duygu
-//second param is the secret key,always use the things which cannot guess. like hwdhjdsfdy38i
-//third param is the time it'll disappear, I want to make this token only for 1 hour
   if(credentials.username=="admin" && credentials.password=="admin"){
     res.status(200).send({
       isLoggedIn:true,
-      token:token // Used token here
+      token:token 
     })
   }else{
     res.send({
@@ -82,12 +79,8 @@ const productsData = [
     }
   ]
 
-//to verify validate of token in the server, USE custom middleware func like below.Custom middleware func has 3 parameters
-//next func will help you to proceed to the next process in the queu.
 app.use((req,res,next)=>{
   const token=req.body.token || req.params.token || req.headers.token;
-//there are 3 ways that server will allow you to send token values. Here we can nOT use body,because it's not POST req
-//we can not use params because there's no params(alttaki products bakiyoruz).We can only send token with headers
   if(!token){
     res.send("Invalid request");
   }else{

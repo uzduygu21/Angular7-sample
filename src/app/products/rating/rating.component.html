@@ -1,10 +1,6 @@
 <div [title]="rating" (click)="sendDataToParent()">
-  <!-- used propery bindign to show real ratings when hover on -->
-  <!-- sendDataToParent func rate'leri click edince caliscak ve rating.ts trigger etcek -->
   <span *ngFor="let value of ratingArr">
-    <!-- loop through ratingArr from ts, this array contents round of data we have -->
     <span class="glyphicon glyphicon-star"></span>
-    <!-- get the class from bootstrap to use star icon, we use span to make them in same line, div makes block -->
   </span>
 </div>
 
