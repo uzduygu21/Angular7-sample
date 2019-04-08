@@ -1,0 +1,51 @@
+<app-panel-box>
+  <span panel-title>Template Driven Forms</span>
+  <div panel-content>
+    <form #userForm="ngForm">
+      <!-- this is how you get reference of particular object. #userForm -->
+      <div class="form-group">
+        <label class="control-label">First Name</label>
+        <input type="text" placeholder="First Name" class="form-control" name="firstname" [(ngModel)]="user.firstname"
+          required minlength="5" #firstnameVar="ngModel">
+        <div *ngIf="!firstnameVar.valid && firstnameVar.touched">
+        <!-- valid olup olmadigini soyluyor/touch egerki veri girmeden gecti ise uyariyi vermemizi sagliyor.!! Daha sayfaya yeni girdiginde uyarilar gozukmesin! -->
+            <div class="alert alert-danger" *ngIf="firstnameVar.errors.required">Please fill in first name</div>
+            <div class="alert alert-danger" *ngIf="firstnameVar.errors.minlength">Please fill in valid first name</div>
+        <!-- Egerki required kismi saglanmyorsa birinci, minlength saglanmiyorsa ikinciyi gostercek, bunun icinde input'un reference aldik #firstnameVar seklinde -->
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Last Name</label>
+          <input type="text" placeholder="Last Name" class="form-control" name="lastname" [(ngModel)]="user.lastname"
+            required minlength="5" #lastnameVar="ngModel">
+        <div *ngIf="!lastnameVar.valid && lastnameVar.touched">
+            <div class="alert alert-danger" *ngIf="lastnameVar.errors.required">Please fill in last name</div>
+            <div class="alert alert-danger" *ngIf="lastnameVar.errors.minlength">Please fill in valid last name</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Email</label>
+          <input type="email" placeholder="Email" class="form-control" name="email" [(ngModel)]="user.email"
+            required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #emailVar="ngModel">
+        <!-- Email validation pattern found from google, you can use any type you want -->
+        <div *ngIf="!emailVar.valid && emailVar.touched">
+          <div class="alert alert-danger" *ngIf="emailVar.errors.required">Please fill in email</div>
+          <div class="alert alert-danger" *ngIf="emailVar.errors.pattern">Please fill in valid email</div>
+        </div>
+      </div>
+      <div class="form-group">
+          <label class="control-label">Male
+            <input type="radio" value="male" name="gender" [(ngModel)]="user.gender" required  #genderVar="ngModel">
+          </label>
+          <label class="control-label">Female
+            <input type="radio" value="female" name="gender" [(ngModel)]="user.gender" required  #genderVar="ngModel">
+          </label>
+          <div *ngIf="!genderVar.valid && genderVar.touched">
+            <div class="alert alert-danger" *ngIf="emailVar.errors.required">Please select gender</div>
+          </div>
+        </div>
+      <button class="btn btn-primary" [disabled]="!userForm.valid">Save</button>
+    <!-- Using reference of the form, if it's not valid I disabled button.  -->
+    </form>
+  </div>
+</app-panel-box>

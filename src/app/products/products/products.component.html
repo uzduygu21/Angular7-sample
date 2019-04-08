@@ -1,0 +1,46 @@
+<app-panel-box>
+  <span panel-title>{{pageTitle}}</span>
+  <div panel-content>
+        <div>
+          <input type="text" placeholder="Filter Products" [(ngModel)]="filterBy" class="form-control">
+        </div>
+        <div class="alert alert-success" *ngIf="filterBy">
+            {{filterBy}}
+        </div>
+          
+        <table class="table table-bordered" *ngIf="products && products.length">
+          <tr>
+            <th>
+              <button class="btn btn-primary" (click)="toggleImage()">{{showHideImg ? "HideImage":"ShowImage"}}</button>
+            </th>
+            <th>Product Name</th>
+            <th>Product Code</th>
+            <th>Price</th>
+            <th>Rating</th>
+          </tr>
+          <tr *ngFor="let product of products | products:filterBy">
+            <td>
+              <img [src]="product.imageUrl" style="width:50px" *ngIf="showHideImg"> 
+            </td>
+            <td>
+              <a href="#" [routerLink]="['/products',product.productCode]">
+              {{product.productName}}
+              <!-- productName leri link yaptikki tiklansin, herzaman ilk route URL pattern olcak, burda /products fakat sadece onu yazinca hepsi ayni sadece /products oluyo linkler
+              Farkli olmasi lazimki sayfalari ayirt edebilelim. product.productCode, hepinin code'unu sagladi ornegin /products/GDN-0011, hepsi farkli-farkli -->
+              </a>
+            </td>
+            <td>{{product.productCode}}</td>
+            <td>{{product.price}}</td>
+            <td>
+              <app-rating [rating]="product.starRating" (ratingEvent)="receiveDataFromChild($event)"></app-rating> 
+      <!-- we make rating available for products and used property binding // send data from parent to child-->
+      <!-- ratingEvent for receiving data from child, we used eventemitter use $event-->
+            </td>
+          </tr>
+        </table>
+  </div>
+</app-panel-box>
+
+
+  
+
